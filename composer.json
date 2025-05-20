@@ -1,0 +1,32 @@
+{
+  "name": "samuel/test_jam-difus",
+  "description": "test php JAM-Difus",
+  "type": "project",
+  "require": {
+    "php": "7.4.*",
+    "ext-pdo": "*",
+    "ext-ctype": "*",
+    "ext-json": "*",
+    "electrolinux/phpquery": "^0.9.7"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.11",
+    "phpunit/phpunit": "9.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Samuel Guichardon",
+      "email": "samuel.guichardon@icloud.com"
+    }
+  ]
+}

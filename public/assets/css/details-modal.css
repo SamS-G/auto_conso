@@ -1,0 +1,190 @@
+.modal-dialog {
+    margin: 1.75rem auto;
+    max-width: 40vw;
+}
+
+.modal-content {
+    background-color: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 1.5rem 1.75rem 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+}
+
+.modal-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #1a1a2e;
+    margin: 0;
+    position: relative;
+}
+
+.modal-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #3a86ff;
+    border-radius: 2px;
+}
+
+.btn-close {
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E") center/16px no-repeat;
+    border: none;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 50%;
+    position: relative;
+    z-index: 10;
+}
+
+.btn-close:hover {
+    opacity: 1;
+    background-color: #f0f0f0;
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 0 1.75rem 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+/* Création de cartes pour chaque information */
+.modal-body > div {
+    flex: 1;
+    min-width: 280px;
+}
+
+.modal-body p {
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: baseline;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.modal-body p:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+    background-color: #f3f6fa;
+}
+
+/* Style des labels */
+.modal-body p strong {
+    color: #626678;
+    font-size: 1rem;
+    margin-right: 12px;
+    min-width: 120px;
+    position: relative;
+}
+
+.modal-body p strong::after {
+    content: ':';
+    position: absolute;
+    right: 0;
+}
+
+/* Style amélioré pour les valeurs (texte non-strong) */
+.modal-body p {
+    position: relative;
+}
+
+/* Classe énergétique */
+.modal-body p:has(.energy-class) {
+    display: flex;
+    align-items: center;
+}
+
+.energy-class {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.energy-A {
+    background: linear-gradient(135deg, #37a956, #2d7d46);
+}
+
+.energy-B {
+    background: linear-gradient(135deg, #6cb972, #5aa862);
+}
+
+.energy-C {
+    background: linear-gradient(135deg, #d3e44b, #c1d32f);
+}
+
+.energy-D {
+    background: linear-gradient(135deg, #fff263, #ffe733);
+    color: #333;
+}
+
+.energy-E {
+    background: linear-gradient(135deg, #ffbc5e, #f6ac3e);
+}
+
+.energy-F {
+    background: linear-gradient(135deg, #ff8c59, #ef7c39);
+}
+
+.energy-G {
+    background: linear-gradient(135deg, #ff5252, #e42f2f);
+}
+
+/* Animation d'entrée */
+.modal.show .modal-dialog {
+    animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .modal-body {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .modal-body > div {
+        width: 100%;
+    }
+
+    .modal-body p strong {
+        min-width: 100px;
+    }
+}
