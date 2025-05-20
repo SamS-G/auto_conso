@@ -19,7 +19,7 @@ Possibilité de supprimer une entrée de la base.
 
 ---
 
-### 📦 Installation
+### 📦 Installation et utilisation
 
 1. Installer les dépendances PHP :
 
@@ -36,7 +36,19 @@ Possibilité de supprimer une entrée de la base.
       ```bash
     http://localhost:8080/seed
 
-3. Accéder à l'application :
+4. Accéder à l'application :
 
       ```bash
     http://localhost:8080
+
+---
+
+## 🧪 Lancer les tests unitaires
+
+Les tests sont écrits avec [PHPUnit 9](https://phpunit.de/).
+
+Dans le conteneur Docker PHP, exécuter la commande suivante depuis la racine du projet :
+
+ ```bash
+   docker exec -it auto_conso-php-1 php vendor/phpunit/phpunit/phpunit ./tests
+
