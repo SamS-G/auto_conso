@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS car_model
     FOREIGN KEY (brand_id) REFERENCES brand (id),
     FOREIGN KEY (gearbox_type_id) REFERENCES gearbox_type (id)
 );
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (1, 1, '147 3P 1.6L TS (105ch)', 'ES', 'MAL1301JZ595', 2, 7, 105, 77, 'E')
@@ -1018,6 +1019,7 @@ VALUES (1, 1, '147 3P 1.6L TS (105ch)', 'ES', 'MAL1301JZ595', 2, 7, 105, 77, 'E'
      , (5, 998, 'X5 xDrive48i', 'ES', 'MBM4974KL919', 1, 27, 355, 261, 'G')
      , (5, 999, 'X6 xDrive30d', 'GO', 'MBM8964K9217', 1, 15, 235, 173, 'F')
      , (5, 1000, 'X6 xDrive35d', 'GO', 'MBM8954KS661', 1, 19, 285, 210, 'F');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (5, 1001, 'X6 xDrive35i', 'ES', 'MBM4974KD559', 1, 22, 306, 225, 'G')
@@ -2021,6 +2023,7 @@ VALUES (5, 1001, 'X6 xDrive35i', 'ES', 'MBM4974KD559', 1, 22, 306, 225, 'G')
      , (21, 1998, 'CARNIVAL 2.9 CRDi BVA', 'GO', 'MKA7804F3750', 1, 12, 185, 136, 'F')
      , (21, 1999, 'CEED 1.4', 'ES', 'MKA1302TH628', 2, 6, 105, 77, 'D')
      , (21, 2000, 'CEED 1.4', 'ES', 'MKA1602TL638', 2, 8, 143, 105, 'E');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (21, 2001, 'CEED 1.6 (126ch)', 'ES', 'MKA1502TL745', 2, 7, 125, 92, 'D')
@@ -3023,6 +3026,7 @@ VALUES (21, 2001, 'CEED 1.6 (126ch)', 'ES', 'MKA1502TL745', 2, 7, 125, 92, 'D')
      , (29, 2998, 'A 180 CDI COUPE BVA FAP', 'GO', 'MMB93K2PPZ66', 1, 6, 109, 80, 'D')
      , (29, 2999, 'A 180 CDI COUPE BVA FAP', 'GO', 'MMB93K2PPZ67', 1, 6, 109, 80, 'D')
      , (29, 3000, 'A 180 CDI COUPE BVM6', 'GO', 'MMB53H1P6W42', 2, 6, 109, 80, 'C');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (29, 3001, 'A 180 CDI COUPE BVM6', 'GO', 'MMB53H1P7W43', 2, 6, 109, 80, 'C')
@@ -4025,6 +4029,7 @@ VALUES (29, 3001, 'A 180 CDI COUPE BVM6', 'GO', 'MMB53H1P7W43', 2, 6, 109, 80, '
      , (29, 3998, 'C 220 CDI STATION WAGON BVM6', 'GO', 'MMB56F4ARO70', 2, 9, 149, 110, 'E')
      , (29, 3999, 'C 220 CDI STATION WAGON BVM6', 'GO', 'MMB56F4ASN18', 2, 9, 149, 110, 'E')
      , (29, 4000, 'C 220 CDI STATION WAGON BVM6', 'GO', 'MMB56F4ATN19', 2, 9, 149, 110, 'E');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (29, 4001, 'C 220 CDI STATION WAGON BVM6', 'GO', 'MMB56F4AVO74', 2, 9, 149, 110, 'E')
@@ -5027,6 +5032,7 @@ VALUES (29, 4001, 'C 220 CDI STATION WAGON BVM6', 'GO', 'MMB56F4AVO74', 2, 9, 14
      , (29, 4998, 'GLK 280 4 MATIC BVA7', 'ES', 'MMB49M42JB82', 1, 16, 231, 170, 'F')
      , (29, 4999, 'GLK 280 4 MATIC BVA7', 'ES', 'MMB49M42JB83', 1, 16, 231, 170, 'F')
      , (29, 5000, 'GLK 320 CDI 4 MATIC BVA7', 'GO', 'MMB89K428X75', 1, 14, 224, 165, 'F');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (29, 5001, 'GLK 320 CDI 4 MATIC BVA7', 'GO', 'MMB89K429X76', 1, 15, 224, 165, 'F')
@@ -6033,6 +6039,7 @@ VALUES (29, 5001, 'GLK 320 CDI 4 MATIC BVA7', 'GO', 'MMB89K429X76', 1, 15, 224, 
      , (33, 5998, 'ZAFIRA 1.9L CDTI (120 ch) BVM6 FAP', 'GO', 'MPL54F6MM696', 2, 7, 120, 88, 'D')
      , (33, 5999, 'ZAFIRA 1.9L CDTI (120ch) BVA6 FAP', 'GO', 'MPL74G6MG396', 1, 8, 120, 88, 'E')
      , (33, 6000, 'ZAFIRA 1.9L CDTI (120ch) BVA6 FAP', 'GO', 'MPL74G6MH397', 1, 8, 120, 88, 'E');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (33, 6001, 'ZAFIRA 1.9L CDTI (120ch) BVM6 FAP', 'GO', 'MPL54F6MP735', 2, 7, 120, 88, 'D')
@@ -7043,6 +7050,7 @@ VALUES (33, 6001, 'ZAFIRA 1.9L CDTI (120ch) BVM6 FAP', 'GO', 'MPL54F6MP735', 2, 
      , (37, 6998, 'TRAFIC 30BUS L1H1 1.0t 9PL 2.0DCI (115ch) BVR6', 'GO', 'MRE7433LK297', 1, 8, 114, 84, 'F')
      , (37, 6999, 'TRAFIC 30BUS L1H1 1.0t 9PL 2.0DCI (90ch) BVM6', 'GO', 'MRE5233LY301', 2, 7, 90, 66, 'F')
      , (37, 7000, 'TRAFIC 30BUS L1H1 1.0t 9PL 2.0L 16V (120ch) BVM6', 'ES', 'MRE1433L5300', 2, 9, 117, 86, 'F');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (37, 7001, 'TRAFIC 30BUS L1H1 1.0t 9PL 2.5DCI (115ch) BVM6', 'GO', 'MRE5433LJ302', 2, 8, 114, 84, 'F')
@@ -8045,6 +8053,7 @@ VALUES (37, 7001, 'TRAFIC 30BUS L1H1 1.0t 9PL 2.5DCI (115ch) BVM6', 'GO', 'MRE54
      , (45, 7998, 'RAV4 (152ch) VVT-i', 'ES', 'MJT2792B8410', 2, 10, 152, 112, 'F')
      , (45, 7999, 'RAV4 (152ch) VVT-i', 'ES', 'MJT2792B9411', 2, 10, 152, 112, 'F')
      , (45, 8000, 'RAV4 (152ch) VVT-i', 'ES', 'MJT2792BA412', 2, 10, 152, 112, 'F');
+
 INSERT IGNORE INTO car_model(brand_id, consumption_data_id, model_name, energy_type, cnit, gearbox_type_id, tax_power,
                              din_power, kw_power, energy_class)
 VALUES (45, 8001, 'RAV4 (152ch) VVT-i BVA4', 'ES', 'MJT4772B9443', 1, 10, 152, 112, 'F')

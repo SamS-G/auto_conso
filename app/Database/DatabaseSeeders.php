@@ -92,31 +92,7 @@ class DatabaseSeeders
             // Construit le chemin complet vers le fichier SQL pour la table actuelle.
             $sqlFilePath = sprintf('%s%s%s', $this->seedDataPath, $tableName, '.sql');
             try {
-                // Vérifie si le fichier SQL existe.
-                if (file_exists($sqlFilePath)) {
-                    // Lit le contenu du fichier SQL.
-                    $sql = file_get_contents($sqlFilePath);
-                    // Normalise les espaces en LF (Unix)
-                    $sql = str_replace(["\r\n", "\r"], "\n", $sql);
-                    // Sépare les différentes requêtes SQL dans le fichier en utilisant ";\n" comme délimiteur.
-                    $queries = explode(";\n", $sql);
-
-                    // Parcourt chaque requête SQL.
-                    foreach ($queries as $query) {
-                        // Supprime les espaces blancs au début et à la fin de la requête.
-                        $query = trim($query);
-                        // Vérifie si la requête n'est pas vide.
-                        if (!empty($query)) {
-                            // Logue l'exécution du script SQL pour la table actuelle.
-                            $this->logger->info("Exécution du script SQL pour la table '$tableName'...\n");
-                            // Exécute la requête SQL.
-                            $this->executeSqlFile($query);
-                        }
-                    }
-                } else {
-                    // Si le fichier SQL n'est pas trouvé, logue une erreur fatale.
-                    $this->logger->fatal("Fichier SQL non trouvé pour la table '$tableName' : '$sqlFilePath'\n");
-                }
+             $this->extractSqlRequest($sqlFilePath, $tableName);
             } catch (PDOException $e) {
                 throw new DataBaseException($this->logger,$e->getMessage(), [], $e->getCode(), $e);
             }
@@ -146,31 +122,7 @@ class DatabaseSeeders
         foreach ($otherTables as $tableName) {
             // Construit le chemin complet vers le fichier SQL pour la table actuelle.
             $sqlFilePath = sprintf('%s%s%s', $this->seedDataPath, $tableName, '.sql');
-
-            // Vérifie si le fichier SQL existe.
-            if (file_exists($sqlFilePath)) {
-                // Lit le contenu du fichier SQL.
-                $sql = file_get_contents($sqlFilePath);
-
-                // Sépare les différentes requêtes SQL dans le fichier.
-                $queries = explode(";\n", $sql);
-
-                // Parcourt chaque requête SQL.
-                foreach ($queries as $query) {
-                    // Supprime les espaces blancs au début et à la fin de la requête.
-                    $query = trim($query);
-                    // Vérifie si la requête n'est pas vide.
-                    if (!empty($query)) {
-                        // Logue l'exécution du script SQL pour la table actuelle.
-                        $this->logger->info("Exécution du script SQL pour la table '$tableName'...\n");
-                        // Exécute la requête SQL.
-                        $this->executeSqlFile($query);
-                    }
-                }
-            } else {
-                // Si le fichier SQL n'est pas trouvé, logue une information
-                $this->logger->fatal("Fichier SQL non trouvé pour la table '$tableName' : '$sqlFilePath'\n");
-            }
+            $this->extractSqlRequest($sqlFilePath, $tableName);
         }
         // Logue la fin du seeding des autres tables.
         $this->logger->info("Seeding des autres tables terminé.\n");
@@ -195,6 +147,34 @@ class DatabaseSeeders
         } catch (PDOException $e) {
             // En cas d'erreur PDO lors de l'exécution, logue une erreur fatale avec le message d'erreur.
             $this->logger->fatal("Erreur lors de l'exécution du script : " . $e->getMessage() . "\n");
+        }
+    }
+    private function extractSqlRequest(string $sqlFilePath, $tableName)
+    {
+        // Vérifie si le fichier SQL existe.
+        if (file_exists($sqlFilePath)) {
+            // Lit le contenu du fichier SQL.
+            $sql = file_get_contents($sqlFilePath);
+            // Normalise les espaces en LF (Unix)
+            $sql = str_replace(["\r\n", "\r"], "\n", $sql);
+            // Sépare les différentes requêtes SQL dans le fichier en utilisant ";\n" comme délimiteur.
+            $queries = explode(";\n", $sql);
+
+            // Parcourt chaque requête SQL.
+            foreach ($queries as $query) {
+                // Supprime les espaces blancs au début et à la fin de la requête.
+                $query = trim($query);
+                // Vérifie si la requête n'est pas vide.
+                if (!empty($query)) {
+                    // Logue l'exécution du script SQL pour la table actuelle.
+                    $this->logger->info("Exécution du script SQL pour la table '$tableName'...\n");
+                    // Exécute la requête SQL.
+                    $this->executeSqlFile($query);
+                }
+            }
+        } else {
+            // Si le fichier SQL n'est pas trouvé, logue une erreur fatale.
+            $this->logger->fatal("Fichier SQL non trouvé pour la table '$tableName' : '$sqlFilePath'\n");
         }
     }
 }
