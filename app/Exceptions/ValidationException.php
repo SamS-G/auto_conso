@@ -15,7 +15,7 @@ class ValidationException extends BaseException
         int $code = 0,
         Throwable $previous = null
     ) {
-        parent::__construct($logService, $message, $code, $previous, $errors);
         $this->setLogLevel('WARNING');
+        parent::__construct($logService, $message, $code, $previous, $errors);
     }
 }

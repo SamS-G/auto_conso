@@ -16,6 +16,5 @@ class RenderException extends BaseException
         Throwable $previous = null
     ) {
         parent::__construct($logService, $message, $code, $previous, $errors);
-        $this->setLogLevel('ERROR');
     }
 }

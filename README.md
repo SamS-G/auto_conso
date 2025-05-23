@@ -1,54 +1,28 @@
-## 🚗 Consommation des véhicules jusqu'à 2009
+## Consommation des véhicules jusqu'à 2009
 
-Permet de consulter les données de consommation en carburant et la classe énergétique d'environ 8500 modèles du parc automobile mondial.  
-Recherche multi critères (Marque, type d'énergie, classe énergétique, type de transmission).  
+Permet de consulter les données de consommation en carburant et la classe énergétique d'environ 8500 modèles du parc automobile mondial.
+Recherche multi critères (Marque, type d'énergie, classe énergétique, type de transmission).
 Possibilité de supprimer une entrée de la base.
 
----
-
-**🧱 Stack technique :**
+**Stack :**
 - PHP 7.4
 - Composer 1.10.27
 - PhpQuery 0.9.7
 - Bootstrap 5
 - JQuery 3.7.1
 
-**🚀 Déploiement de l'application Dockerisée :**
-- Docker 28.1.1
-- Docker Compose 2.35.1
+**Déploiement de l'application :**
 
----
-
-### 📦 Installation et utilisation
-
-1. Installer les dépendances PHP :
-
-   ```bash
-   php composer.phar install
-
-2. Lancer les conteneurs Docker (depuis la racine du projet) :
-
-   ```bash
-   docker compose up --build
-   
-3. Créer les tables et les remplir avec les données d'exemple :
-
-      ```bash
-    http://localhost:8080/seed
-
-4. Accéder à l'application :
-
-      ```bash
-    http://localhost:8080
-
----
-
-## 🧪 Lancer les tests unitaires
-
-Les tests sont écrits avec [PHPUnit 9](https://phpunit.de/).
-
-Dans le conteneur Docker PHP, exécuter la commande suivante depuis la racine du projet :
-
- ```bash
-   docker exec -it auto_conso-php-1 php vendor/phpunit/phpunit/phpunit ./tests
-
+1. Créer une base de données MariaDB nommée : `vehicles_consumptions_datas`
+2. Créer un utilisateur de la base de données :
+    - username: `jam_diff`
+    - password : `jamDiff123#`
+3. Dans le fichier `config/database.php`, renseigner le *host* (par défaut `localhost`) et le *port* (par défaut `3306`).
+<img src="public/assets/img/database-config.png" width="1200">
+4. Installer les dépendances avec composer : `php composer.phar install`
+5. Bien vérifier que l'encodage du *line separator* n'ait pas été modifié, exemple en **CRLF** (windows) au lieu de **LF** (Unix) par un éditeur ou par Windows si déploiement sous Windows sur les fichiers tous les fichiers **.sql** présents dans le dossier *projet/databases/seed_data/* sinon il y aura une erreur de syntax lors de l'exécution des scripts. 
+Exemple :
+<img src="public/assets/img/encodage.png" width="1200">
+6. Lancer le serveur natif PHP par la commande : `php -S localhost:8000 -t public`
+7. Accéder à l'URL : `http://localhost:8000/seed` pour créer les tables et peupler la base.
+8. Aller à l'URL `http://localhost:8000` pour utiliser l'application.

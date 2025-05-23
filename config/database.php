@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'host' => 'db',
+    'host' => 'localhost',
+    'port' => '3306',
     'databaseName' => 'vehicles_consumptions_datas',
     'charset' => 'utf8mb4',
     'username' => 'jam_diff',
