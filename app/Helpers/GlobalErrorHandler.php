@@ -73,6 +73,7 @@ class GlobalErrorHandler
             $this->logger->error($message);
         } elseif ($exception instanceof PDOException) {
             $this->logger->critical($message);
+            exit();
         } elseif ($exception instanceof Error) {
             $this->logger->critical($message);
         } elseif ($exception instanceof Exception) {
@@ -92,6 +93,7 @@ class GlobalErrorHandler
             print_r($message);
             echo '</prev>';
         }
+        exit();
     }
 
     /**

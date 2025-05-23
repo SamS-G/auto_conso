@@ -27,6 +27,9 @@ class BaseException extends Exception
         $this->logService = $logService;
 
         $this->log();
+        http_response_code(500);
+        echo nl2br("Erreur 500: un problème inattendue est survenu 😕 \n $message");
+        exit();
     }
     protected function setLogLevel(string $level)
     {

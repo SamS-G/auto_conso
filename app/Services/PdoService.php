@@ -34,6 +34,7 @@ class PdoService
      */
     private $password;
     private PDO $connection;
+    private string $port;
 
     /**
      * @throws DataBaseException
@@ -42,14 +43,16 @@ class PdoService
     {
         $this->configService = $configService;
         $this->host = $this->configService->get('database.host', []);
+        $this->port = $this->configService->get('database.port', '3306');
         $this->database = $this->configService->get('database.databaseName', []);
         $this->charset = $this->configService->get('database.charset', 'utf8mb4');
         $this->username = $this->configService->get('database.username', 'root');
         $this->password = $this->configService->get('database.password', '');
         $this->loggerService = $loggerService;
         $dsn = sprintf(
-            "mysql:host=%s;dbname=%s;charset=%s",
+            "mysql:host=%s;port=%s;dbname=%s;charset=%s",
             $this->host,
+            $this->port,
             $this->database,
             $this->charset
         );
