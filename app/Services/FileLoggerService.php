@@ -8,14 +8,22 @@ class FileLoggerService implements LoggerInterface
 {
     private ConfigService $configService;
     private string $filePath;
+    private string $fileName;
+    private string $logFile;
 
     public function __construct(ConfigService $configService)
     {
         $this->configService = $configService;
         $this->filePath = $this->configService->get('app.logFilePath', '/tmp/app.log');
+        $this->fileName = sprintf('app_%s%s', date('Y-m-d'), '.log');
+        $this->logFile = $this->filePath . $this->fileName;
 
-        if (!file_exists($this->filePath)) {
-            fopen($this->filePath, 'c+b');
+        if (!is_dir($this->filePath)) {
+            mkdir($this->filePath, 0775, true);
+        }
+
+        if (!file_exists($this->logFile)) {
+            fopen($this->logFile, 'c+b');
         }
     }
 
@@ -23,7 +31,8 @@ class FileLoggerService implements LoggerInterface
     {
         $date = date('Y-m-d H:i:s');
         $logMessage = sprintf("[%s] [%s] %s\n", $date, $level, $message);
-        file_put_contents($this->filePath, $logMessage, FILE_APPEND);
+
+        file_put_contents($this->logFile, $logMessage, FILE_APPEND);
     }
 
     public function fatal(string $message): void

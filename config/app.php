@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'logFilePath' => dirname(__DIR__) . '/logs/' . 'app_' . date('Y-m-d') . '.log',
+    'logFilePath' => dirname(__DIR__) . '/logs/',
     'controllers' => "App\\Http\\Controllers",
     'templates_path' => [
         'index' => dirname(__DIR__) . '/resources/views/templates/car/index.php',

@@ -2,6 +2,7 @@
 
 namespace App\Database;
 
+use App\Exceptions\DataBaseException;
 use App\Services\ConfigService;
 use App\Services\Interfaces\LoggerInterface;
 use PDO;
@@ -76,6 +77,7 @@ class DatabaseSeeders
      * Elle lit les fichiers SQL correspondants et exécute les requêtes.
      *
      * @return void
+     * @throws DataBaseException
      */
     private function seedEnumTables()
     {
@@ -89,31 +91,36 @@ class DatabaseSeeders
         foreach ($enumTables as $tableName) {
             // Construit le chemin complet vers le fichier SQL pour la table actuelle.
             $sqlFilePath = sprintf('%s%s%s', $this->seedDataPath, $tableName, '.sql');
+            try {
+                // Vérifie si le fichier SQL existe.
+                if (file_exists($sqlFilePath)) {
+                    // Lit le contenu du fichier SQL.
+                    $sql = file_get_contents($sqlFilePath);
+                    // Normalise les espaces en LF (Unix)
+                    $sql = str_replace(["\r\n", "\r"], "\n", $sql);
+                    // Sépare les différentes requêtes SQL dans le fichier en utilisant ";\n" comme délimiteur.
+                    $queries = explode(";\n", $sql);
 
-            // Vérifie si le fichier SQL existe.
-            if (file_exists($sqlFilePath)) {
-                // Lit le contenu du fichier SQL.
-                $sql = file_get_contents($sqlFilePath);
-
-                // Sépare les différentes requêtes SQL dans le fichier en utilisant ";\n" comme délimiteur.
-                $queries = explode(";\n", $sql);
-
-                // Parcourt chaque requête SQL.
-                foreach ($queries as $query) {
-                    // Supprime les espaces blancs au début et à la fin de la requête.
-                    $query = trim($query);
-                    // Vérifie si la requête n'est pas vide.
-                    if (!empty($query)) {
-                        // Logue l'exécution du script SQL pour la table actuelle.
-                        $this->logger->info("Exécution du script SQL pour la table '$tableName'...\n");
-                        // Exécute la requête SQL.
-                        $this->executeSqlFile($query);
+                    // Parcourt chaque requête SQL.
+                    foreach ($queries as $query) {
+                        // Supprime les espaces blancs au début et à la fin de la requête.
+                        $query = trim($query);
+                        // Vérifie si la requête n'est pas vide.
+                        if (!empty($query)) {
+                            // Logue l'exécution du script SQL pour la table actuelle.
+                            $this->logger->info("Exécution du script SQL pour la table '$tableName'...\n");
+                            // Exécute la requête SQL.
+                            $this->executeSqlFile($query);
+                        }
                     }
+                } else {
+                    // Si le fichier SQL n'est pas trouvé, logue une erreur fatale.
+                    $this->logger->fatal("Fichier SQL non trouvé pour la table '$tableName' : '$sqlFilePath'\n");
                 }
-            } else {
-                // Si le fichier SQL n'est pas trouvé, logue une erreur fatale.
-                $this->logger->fatal("Fichier SQL non trouvé pour la table '$tableName' : '$sqlFilePath'\n");
+            } catch (PDOException $e) {
+                throw new DataBaseException($this->logger,$e->getMessage(), [], $e->getCode(), $e);
             }
+
         }
         // Logue la fin du seeding des tables d'énumération.
         $this->logger->info("Seeding des tables d'énumération terminé.\n");
